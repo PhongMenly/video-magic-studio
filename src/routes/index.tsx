@@ -34,6 +34,12 @@ import {
 } from "lucide-react";
 import { useRef, useState } from "react";
 
+import sampleGolfAerial from "@/assets/sample-golf-aerial.mp4.asset.json";
+import sampleGolfMan from "@/assets/sample-golf-man.mp4.asset.json";
+import sampleGolfSwing from "@/assets/sample-golf-swing.mp4.asset.json";
+import sampleLake from "@/assets/sample-lake.mp4.asset.json";
+import sampleTravel from "@/assets/sample-travel.mp4.asset.json";
+import sampleVilla from "@/assets/sample-villa.mp4.asset.json";
 import presenter from "@/assets/sample-presenter.jpg";
 import runner from "@/assets/sample-runner.jpg";
 import stretch from "@/assets/sample-stretch.jpg";
@@ -72,12 +78,12 @@ const tools: AiTool[] = [
 ];
 
 const samples = [
-  { image: runner, name: "Video mẫu 1", position: "50% 40%" },
-  { image: stretch, name: "Video mẫu 2", position: "50% 45%" },
-  { image: presenter, name: "Video mẫu 3", position: "50% 40%" },
-  { image: stretch, name: "Video mẫu 4", position: "65% 45%" },
-  { image: presenter, name: "Video mẫu 5", position: "50% 35%" },
-  { image: runner, name: "Video mẫu 6", position: "30% 40%" },
+  { video: sampleGolfAerial.url, name: "Video mẫu 1" },
+  { video: sampleVilla.url, name: "Video mẫu 2" },
+  { video: sampleGolfSwing.url, name: "Video mẫu 3" },
+  { video: sampleGolfMan.url, name: "Video mẫu 4" },
+  { video: sampleTravel.url, name: "Video mẫu 5" },
+  { video: sampleLake.url, name: "Video mẫu 6" },
 ];
 
 const projects = [
@@ -90,6 +96,7 @@ const projects = [
 
 function Index() {
   const inputRef = useRef<HTMLInputElement>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [mode, setMode] = useState("Video dài → Short");
   const [tab, setTab] = useState("Tất cả các dự án");
   const [url, setUrl] = useState("");
@@ -101,6 +108,20 @@ function Index() {
 
   function handleUrl() {
     setNotice(url.trim() ? "Đã nhận liên kết — sẵn sàng tạo dự án." : "Hãy dán liên kết video trước.");
+  }
+
+  function toggleSample(index: number) {
+    const video = videoRefs.current[index];
+    if (!video) return;
+    if (playingSample === index) {
+      video.pause();
+      setPlayingSample(null);
+      return;
+    }
+    videoRefs.current.forEach((other, i) => { if (i !== index && other) other.pause(); });
+    video.play().catch(() => undefined);
+    setSelectedSample(index);
+    setPlayingSample(index);
   }
 
   function chooseFile(file?: File) {
@@ -199,8 +220,8 @@ function Index() {
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {samples.map((sample, index) => (
               <article key={sample.name} className={cn("group relative overflow-hidden rounded-lg border bg-card transition-colors", selectedSample === index ? "border-brand" : "border-border")}>
-                <button type="button" onClick={() => { setSelectedSample(index); setPlayingSample(playingSample === index ? null : index); }} className="relative block aspect-[9/14] w-full overflow-hidden bg-panel">
-                  <img src={sample.image} alt={sample.name} loading="lazy" width={768} height={1376} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" style={{ objectPosition: sample.position }} />
+                <button type="button" onClick={() => toggleSample(index)} className="relative block aspect-[9/14] w-full overflow-hidden bg-panel">
+                  <video ref={(el) => { videoRefs.current[index] = el; }} src={sample.video} muted loop autoPlay playsInline preload="auto" className="h-full w-full object-cover" />
                   <span className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-background/10" />
                   <span className="absolute right-2 top-2 grid size-6 place-items-center rounded-full border border-foreground/20 bg-background/65 text-foreground">
                     {playingSample === index ? <Pause className="size-3" fill="currentColor" /> : <Play className="ml-0.5 size-3" fill="currentColor" />}
