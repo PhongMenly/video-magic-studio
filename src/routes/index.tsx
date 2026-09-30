@@ -34,6 +34,12 @@ import {
 } from "lucide-react";
 import { useRef, useState } from "react";
 
+import sampleGolfAerial from "@/assets/sample-golf-aerial.mp4.asset.json";
+import sampleGolfMan from "@/assets/sample-golf-man.mp4.asset.json";
+import sampleGolfSwing from "@/assets/sample-golf-swing.mp4.asset.json";
+import sampleLake from "@/assets/sample-lake.mp4.asset.json";
+import sampleTravel from "@/assets/sample-travel.mp4.asset.json";
+import sampleVilla from "@/assets/sample-villa.mp4.asset.json";
 import presenter from "@/assets/sample-presenter.jpg";
 import runner from "@/assets/sample-runner.jpg";
 import stretch from "@/assets/sample-stretch.jpg";
@@ -72,12 +78,12 @@ const tools: AiTool[] = [
 ];
 
 const samples = [
-  { image: runner, name: "Video mẫu 1", position: "50% 40%" },
-  { image: stretch, name: "Video mẫu 2", position: "50% 45%" },
-  { image: presenter, name: "Video mẫu 3", position: "50% 40%" },
-  { image: stretch, name: "Video mẫu 4", position: "65% 45%" },
-  { image: presenter, name: "Video mẫu 5", position: "50% 35%" },
-  { image: runner, name: "Video mẫu 6", position: "30% 40%" },
+  { video: sampleGolfAerial.url, name: "Video mẫu 1" },
+  { video: sampleVilla.url, name: "Video mẫu 2" },
+  { video: sampleGolfSwing.url, name: "Video mẫu 3" },
+  { video: sampleGolfMan.url, name: "Video mẫu 4" },
+  { video: sampleTravel.url, name: "Video mẫu 5" },
+  { video: sampleLake.url, name: "Video mẫu 6" },
 ];
 
 const projects = [
