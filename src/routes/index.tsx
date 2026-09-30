@@ -110,6 +110,20 @@ function Index() {
     setNotice(url.trim() ? "Đã nhận liên kết — sẵn sàng tạo dự án." : "Hãy dán liên kết video trước.");
   }
 
+  function toggleSample(index: number) {
+    const video = videoRefs.current[index];
+    if (!video) return;
+    if (playingSample === index) {
+      video.pause();
+      setPlayingSample(null);
+      return;
+    }
+    videoRefs.current.forEach((other, i) => { if (i !== index && other) other.pause(); });
+    video.play().catch(() => undefined);
+    setSelectedSample(index);
+    setPlayingSample(index);
+  }
+
   function chooseFile(file?: File) {
     if (!file) return;
     setFileName(file.name);
