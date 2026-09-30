@@ -205,8 +205,8 @@ function Index() {
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {samples.map((sample, index) => (
               <article key={sample.name} className={cn("group relative overflow-hidden rounded-lg border bg-card transition-colors", selectedSample === index ? "border-brand" : "border-border")}>
-                <button type="button" onClick={() => { setSelectedSample(index); setPlayingSample(playingSample === index ? null : index); }} className="relative block aspect-[9/14] w-full overflow-hidden bg-panel">
-                  <img src={sample.image} alt={sample.name} loading="lazy" width={768} height={1376} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" style={{ objectPosition: sample.position }} />
+                <button type="button" onClick={() => toggleSample(index)} className="relative block aspect-[9/14] w-full overflow-hidden bg-panel">
+                  <video ref={(el) => { videoRefs.current[index] = el; }} src={sample.video} muted loop autoPlay playsInline preload="auto" className="h-full w-full object-cover" />
                   <span className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-background/10" />
                   <span className="absolute right-2 top-2 grid size-6 place-items-center rounded-full border border-foreground/20 bg-background/65 text-foreground">
                     {playingSample === index ? <Pause className="size-3" fill="currentColor" /> : <Play className="ml-0.5 size-3" fill="currentColor" />}
