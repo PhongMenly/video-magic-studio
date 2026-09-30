@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Project architecture
+
+- Keep the Clips workspace as a single route with reusable UI primitives and all visual roles expressed through semantic tokens in `src/styles.css`, so future editor modules can extend the interface consistently.
