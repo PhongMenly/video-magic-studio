@@ -96,6 +96,7 @@ const projects = [
 
 function Index() {
   const inputRef = useRef<HTMLInputElement>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [mode, setMode] = useState("Video dài → Short");
   const [tab, setTab] = useState("Tất cả các dự án");
   const [url, setUrl] = useState("");
