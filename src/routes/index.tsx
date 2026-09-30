@@ -43,9 +43,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Clips — Video dài thành nhiều Short" },
+      { title: "Master Clip — Video dài thành nhiều Short" },
       { name: "description", content: "Biến video thô thành nội dung viral tự động bằng AI." },
-      { property: "og:title", content: "Clips — Video dài thành nhiều Short" },
+      { property: "og:title", content: "Master Clip — Video dài thành nhiều Short" },
       { property: "og:description", content: "Biến video thô thành nội dung viral tự động bằng AI." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -272,7 +272,7 @@ function Header({ onNotice }: { onNotice: (message: string) => void }) {
       <div className="flex h-full items-center justify-between px-3 sm:px-5">
         <div className="flex min-w-0 items-center gap-3">
           <Button variant="ghost" size="icon" className="xl:hidden"><Menu className="size-4" /></Button>
-          <div className="font-display text-2xl font-extrabold italic gold-text sm:text-3xl">Clips</div>
+          <div className="font-display text-2xl font-extrabold italic gold-text sm:text-3xl">Master Clip</div>
           <span className="hidden text-xs font-semibold text-muted-foreground sm:inline">Video dài → Nhiều Short</span>
         </div>
         <div className="hidden text-[10px] font-semibold text-muted-foreground lg:block">Thời Gian · Thu Nhập · Tự Do</div>
