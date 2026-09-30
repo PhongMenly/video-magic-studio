@@ -43,9 +43,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Clips — Video dài thành nhiều Short" },
+      { title: "Master Clip — Video dài thành nhiều Short" },
       { name: "description", content: "Biến video thô thành nội dung viral tự động bằng AI." },
-      { property: "og:title", content: "Clips — Video dài thành nhiều Short" },
+      { property: "og:title", content: "Master Clip — Video dài thành nhiều Short" },
       { property: "og:description", content: "Biến video thô thành nội dung viral tự động bằng AI." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -172,13 +172,25 @@ function Index() {
 
         <section className="relative z-10 mt-8" aria-labelledby="ai-tools-title">
           <h2 id="ai-tools-title" className="text-center text-[10px] font-bold uppercase tracking-[0.22em] text-muted-foreground">Được hỗ trợ bởi AI</h2>
-          <div className="mt-4 grid grid-cols-4 gap-y-5 sm:grid-cols-6 lg:grid-cols-12">
-            {tools.map(({ icon: Icon, label, sublabel }) => (
-              <button key={label} type="button" onClick={() => setNotice(`${label}${sublabel ? ` ${sublabel}` : ""} đã được chọn.`)} className="group flex min-w-0 flex-col items-center gap-2 text-center">
-                <span className="grid size-10 place-items-center rounded-full border border-border bg-panel-raised text-brand transition-all group-hover:border-brand group-hover:bg-brand/10"><Icon className="size-[18px]" strokeWidth={1.8} /></span>
-                <span className="text-[9px] font-semibold leading-3 text-muted-foreground group-hover:text-foreground">{label}<br />{sublabel}</span>
-              </button>
-            ))}
+          <div className="marquee relative mt-4 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_7%,black_93%,transparent)]">
+            <div className="marquee-track flex w-max items-start">
+              {[0, 1].map((copy) => (
+                <div key={copy} aria-hidden={copy === 1} className="flex items-start gap-5 pr-5 sm:gap-8 sm:pr-8">
+                  {tools.map(({ icon: Icon, label, sublabel }) => (
+                    <button
+                      key={`${copy}-${label}`}
+                      type="button"
+                      tabIndex={copy === 1 ? -1 : 0}
+                      onClick={() => setNotice(`${label}${sublabel ? ` ${sublabel}` : ""} đã được chọn.`)}
+                      className="group flex w-[72px] shrink-0 flex-col items-center gap-2 text-center sm:w-[86px]"
+                    >
+                      <span className="grid size-10 place-items-center rounded-full border border-border bg-panel-raised text-brand transition-all group-hover:border-brand group-hover:bg-brand/10"><Icon className="size-[18px]" strokeWidth={1.8} /></span>
+                      <span className="text-[9px] font-semibold leading-3 text-muted-foreground group-hover:text-foreground">{label}<br />{sublabel}</span>
+                    </button>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -260,7 +272,7 @@ function Header({ onNotice }: { onNotice: (message: string) => void }) {
       <div className="flex h-full items-center justify-between px-3 sm:px-5">
         <div className="flex min-w-0 items-center gap-3">
           <Button variant="ghost" size="icon" className="xl:hidden"><Menu className="size-4" /></Button>
-          <div className="font-display text-2xl font-extrabold italic gold-text sm:text-3xl">Clips</div>
+          <div className="font-display text-2xl font-extrabold italic gold-text sm:text-3xl">Master Clip</div>
           <span className="hidden text-xs font-semibold text-muted-foreground sm:inline">Video dài → Nhiều Short</span>
         </div>
         <div className="hidden text-[10px] font-semibold text-muted-foreground lg:block">Thời Gian · Thu Nhập · Tự Do</div>
